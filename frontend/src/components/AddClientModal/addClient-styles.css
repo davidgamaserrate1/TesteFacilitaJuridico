@@ -26,9 +26,30 @@
     margin: 4px 0;
 }
 
- 
-
 .modal_form__item__button{
     width: 100px;
     margin: 16px auto;
 }
+
+.moda_form_item_coord{
+    display: flex;
+    gap: 8px;
+     
+}
+
+.moda_form_item_coord{
+    margin: 16px 0;
+}
+
+.moda_form_item_coord_tittle{
+    margin-top: 16px;
+}
+
+
+.modal_add_client_out{
+    width: 100%;
+    margin: 16px 64px;
+    
+}
+
+ 

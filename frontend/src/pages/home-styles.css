@@ -8,6 +8,7 @@
  
 
 .top_actions{
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: space-around;
@@ -29,3 +30,5 @@
 .top_acion__add_client:hover{
     cursor: pointer;
 }
+
+ 

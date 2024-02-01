@@ -143,3 +143,64 @@ export async function updateClientById(req, res) {
         });
     }
 }
+
+ 
+export async function listClientsByCriteria(req, res) {
+    try {
+        const { filters } = req.body;
+        if (!filters || Object.keys(filters).length === 0) {
+            return res.status(400).json({
+                message: 'Por favor, forneça pelo menos um critério de filtro.',
+            });
+        }
+
+        const queryParams = [];
+        const whereClauses = [];
+
+        Object.keys(filters).forEach((key, index) => {
+            const value = filters[key];
+
+            switch (key) {
+                case 'id':
+                    whereClauses.push(`id = $${index + 1}`);
+                    queryParams.push(value);
+                    break;
+                case 'name':
+                    whereClauses.push(`name ILIKE $${index + 1}`);
+                    queryParams.push(`%${value}%`);
+                    break;
+                case 'mail':
+                    whereClauses.push(`mail ILIKE $${index + 1}`);
+                    queryParams.push(`%${value}%`);
+                    break;
+                case 'phone':
+                    whereClauses.push(`phone ILIKE $${index + 1}`);
+                    queryParams.push(`%${value}%`);
+                    break;
+                default:
+                    return res.status(400).json({
+                        message: `Critério inválido: ${key}. Escolha entre id, name, mail ou phone.`,
+                    });
+            }
+        });
+        
+        const querySelect = `SELECT * FROM client WHERE ${whereClauses.join(' AND ')};`;
+        console.log(querySelect, queryParams)
+
+        const queryResult = await dbConnection.query(querySelect, queryParams);
+        const listClients = queryResult.rows;
+
+        if (listClients[0]?.id !== undefined)
+            return res.status(200).json(listClients);
+
+        res.status(404).json({
+            message: 'Nenhum cliente encontrado com base nos critérios fornecidos.',
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            error: `Erro ao listar clientes: ${error}`,
+        });
+    }
+}
+

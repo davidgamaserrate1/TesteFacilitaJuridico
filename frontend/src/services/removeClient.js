@@ -1,14 +1,13 @@
 export async function removeClient(id) {
     try {
-        const request = await fetch(process.env.REACT_APP_CLIENT_API_BASE + `/${id}`, {
+        const request = await fetch(process.env.REACT_APP_CLIENT_API_BASE + `/remover/${id}`, {
             method: 'DELETE'
         });
-
-        const response = await request.json();
-        return response;
+        
+        return request;
 
     } catch (error) {
-        console.error('Erro ao atualizar clientes:', error);
+        console.error('Erro ao remover cliente:', error);
         throw error;
     }
 }

@@ -4,6 +4,7 @@ import './home-styles.css'
 import { Content } from "antd/es/layout/layout";
 import { AddClientModal } from "../components/AddClientModal";
 import { getAllClients } from "../services/getClients";
+import TableClients from "../components/TableClients";
  
  
 export function Home() {
@@ -16,7 +17,9 @@ return (
          
         <div className="top_actions">
           <AddClientModal className="top_action_add"/>
-        </div>        
+        </div>    
+        <TableClients />
+        
       </Content>
     </>
   );

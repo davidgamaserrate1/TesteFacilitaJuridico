@@ -22,6 +22,10 @@
     margin-top: 64px;
 }
 
+.modal_form__item__error{
+    margin: 8px 0;
+    width: 100%;
+}
 .modal_form__item{
     margin: 4px 0;
 }

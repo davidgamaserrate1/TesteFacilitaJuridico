@@ -1,15 +1,16 @@
 .main_content{
     border: 1px solid rgb(1,1,1,0.1);
     border-radius: 10px;
-    margin: 64px ;
-    min-height: 500px;
+    width: 90%;
+    margin: 32px auto;
     box-shadow: 2px 2px 4px rgb(1,1,1,0.1);
+    height: 20%;
 }
  
 
 .top_actions{
     position: relative;
-    width: 100%;
+   
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -32,3 +33,14 @@
 }
 
  
+@media (max-width:686px) {
+    .main_content{
+        border: none;
+        border-radius: 10px;
+        width: 90%;
+        margin: 32px auto;
+        box-shadow: none;
+        overflow: scroll;
+    }
+     
+}

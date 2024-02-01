@@ -1,6 +1,5 @@
 export async function createClient(client) {
     try {
-      
         const request = await fetch(process.env.REACT_APP_CLIENT_API_BASE +'/cadastrar', {
             method: 'POST',
             headers:{

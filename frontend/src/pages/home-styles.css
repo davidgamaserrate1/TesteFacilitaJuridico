@@ -10,7 +10,6 @@
 
 .top_actions{
     position: relative;
-   
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -24,14 +23,11 @@
     color: var(--white-color);
     padding: 8px;      
     border-radius: 10px;
-
 }
-
 
 .top_acion__add_client:hover{
     cursor: pointer;
 }
-
  
 @media (max-width:686px) {
     .main_content{

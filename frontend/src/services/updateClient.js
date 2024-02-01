@@ -4,7 +4,6 @@ export async function updateClient(id, data) {
             method: 'PUT',
             body: JSON.stringify(data)
         });
-
         const response = await request.json();
         return response;
 

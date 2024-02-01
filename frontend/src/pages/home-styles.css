@@ -1,0 +1,31 @@
+.main_content{
+    border: 1px solid rgb(1,1,1,0.1);
+    border-radius: 10px;
+    margin: 64px ;
+    min-height: 500px;
+    box-shadow: 2px 2px 4px rgb(1,1,1,0.1);
+}
+ 
+
+.top_actions{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.top_acion__add_client{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--green-color);
+    color: var(--white-color);
+    padding: 8px;      
+    border-radius: 10px;
+
+}
+
+
+.top_acion__add_client:hover{
+    cursor: pointer;
+}

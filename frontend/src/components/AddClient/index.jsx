@@ -27,6 +27,7 @@ export function AddClient(){
             phone : phone
         }
         console.log(client)
+        setIsModalOpen(false);
     }
 
     return(
@@ -36,8 +37,17 @@ export function AddClient(){
         </Button>
         <Modal className='modal'
             open={isModalOpen} 
-            onOk={handleOk} 
+            onOk={sendClient} 
             onCancel={handleCancel} 
+            footer={[
+                <Button className='modal_form__item__button' 
+                    size="large" 
+                    type="primary"
+                    onClick={sendClient}
+                >
+                    Salvar
+                </Button>
+            ]}
         >
             <h2 className='modal_tittle'>Adicionar cliente</h2>
             <div className='modal_form'>
@@ -63,13 +73,7 @@ export function AddClient(){
                     onChange={(e)=>setPhone(e.target.value)}
                 />
 
-                <Button className='modal_form__item__button' 
-                    size="large" 
-                    type="primary"
-                    onClick={sendClient}
-                >
-                    Salvar
-                </Button>
+                
             </div>
         </Modal>
         </>

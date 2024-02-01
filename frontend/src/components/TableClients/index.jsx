@@ -60,7 +60,7 @@ const TableClients = () => {
     },
     {
       title: 'Ação',
-      key: 'action',
+      key: 'action',width: '10%',
       render: (_, record) => (
         <Space size="middle">
           <Button icon={<EditOutlined />} onClick={() => handleEdit(record)} />
@@ -77,11 +77,11 @@ const TableClients = () => {
     },
   ];
 
-if( clientList.message ) return  <div className='empty_message'>{clientList.message}</div> 
+  if( clientList.message ) return  <div className='empty_message'>{clientList.message}</div> 
 
-return(
-    clientList.length > 0  && <Table className='table_clients' columns={columns} dataSource={clientList} /> 
-);
+  return(
+      clientList.length > 0  && <Table className='table_clients' columns={columns} dataSource={clientList} /> 
+  );
 };
 
 export default TableClients;

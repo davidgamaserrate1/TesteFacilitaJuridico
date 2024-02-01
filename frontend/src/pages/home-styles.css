@@ -29,6 +29,10 @@
     cursor: pointer;
 }
  
+.top_action_filters{
+    margin: 16px 64px;
+}
+
 @media (max-width:686px) {
     .main_content{
         border: none;

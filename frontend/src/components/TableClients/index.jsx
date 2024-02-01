@@ -1,35 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, {  } from 'react';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Popconfirm } from 'antd';
-import { getAllClients } from '../../services/getClients';
 import { removeClient } from '../../services/removeClient';
 import './tableClients-styles.css'
 
-const TableClients = () => {
-  const [clientList, setClientList] = useState([]);
-  const [updated, setUpdated] = useState(false)
-
-  useEffect(() => {
-    setUpdated(false)
-    const fetchClients = async () => {
-      try {
-        const clients = await getAllClients();
-        setClientList(clients);
-      } catch (error) {
-        console.error('Erro ao obter clientes:', error);
-      }
-    };
-
-    fetchClients();
-  }, [updated]); 
+export function TableClients ({clientList}) {
+ 
   
   const handleEdit = (record) => {    
     console.log('Editar cliente:', record);
-    setUpdated(true)
   };
 
   const handleDelete = (id) => {
-    setUpdated(true)
     removeClient(id)
   };
 
@@ -56,7 +38,7 @@ const TableClients = () => {
       title: 'Coordenadas',
       dataIndex: 'coordinates',
       key: 'coordinates',
-      width: '10%',
+      width: '10%',      
     },
     {
       title: 'Ação',
@@ -84,4 +66,3 @@ const TableClients = () => {
   );
 };
 
-export default TableClients;

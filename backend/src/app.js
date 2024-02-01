@@ -10,6 +10,6 @@ app.use(cors({
 }))
 
 app.use(bodyParser.json())
-app.use('/cliente', ClientRouter)
+app.use('/clientes', ClientRouter)
 
 export default app

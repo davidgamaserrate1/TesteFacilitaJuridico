@@ -71,8 +71,8 @@ export function FiltersModal  ({  onFilter })  {
     };
   
   return (
-   <>
-        <Button type="primary" onClick={showModal}  icon={<FilterOutlined />}>Filtros</Button>
+   <div  className='modal_add_client_out'>
+        <Button   onClick={showModal}  icon={<FilterOutlined />}>Filtros</Button>
         <Modal open={isModalOpen} onCancel={handleCancel}
             footer={[ 
                 <Button className='modal_form__item__button' type="primary" onClick={()=>handleFilter()}>Filtrar</Button> 
@@ -118,7 +118,7 @@ export function FiltersModal  ({  onFilter })  {
                 </div>
             </div>
         </Modal>
-   </>
+   </div>
   );
 };
 

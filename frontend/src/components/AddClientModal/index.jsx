@@ -67,7 +67,7 @@ export function AddClientModal(){
     return(
         <div  className='modal_add_client_out'>
             {contextHolder}
-            <Button type="primary" 
+            <Button type='link'
                 onClick={showModal} 
                 icon={<UserAddOutlined />} >
                 Adicionar cliente

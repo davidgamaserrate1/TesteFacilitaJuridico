@@ -44,30 +44,33 @@ export function Home() {
   },[]);
   
 return (
-    <>
+      <>
       <Header/>
-      <Content className="main_content">      
-        <div className="top_actions">
-          <div className="top_action_filters">
-            <AddClientModal  />
-            <RouteCalculateModal isModalOpen={isModalOpen} />
-            <FiltersModal onCancel={handleCancel} onFilter={handleFilter} />
-          </div>
-        </div>
-       {filtersList.length > 0 && 
-          <>
-            <div className='tags_filters'>          
-              <Typography.Title level={5}> Filtros </Typography.Title>          
-              {filtersList.map((filter)=><Tag color="blue">{filter}</Tag> )}
+      <section id="home">
+          <div className="main_content_tittle"> Clientes</div>
+          <Content className="main_content">      
+            < div className="top_actions">
+              <div className="top_action_filters">
+                <RouteCalculateModal isModalOpen={isModalOpen} />
+                <FiltersModal onCancel={handleCancel} onFilter={handleFilter} />
+                <AddClientModal  />
+              </div>
             </div>
-            <Tag  onClick={clearFilters}  className='tags_filters_remove' color="red" icon={<CloseCircleOutlined />}>Remover filtros</Tag>
-          </>
-        }
-        <TableClients 
-          clientList={clientList} 
-        />
-      </Content>
-    </>
+            {filtersList.length > 0 && 
+                <>
+                  <div className='tags_filters'>          
+                    <Typography.Title level={5}> Filtros </Typography.Title>          
+                    {filtersList.map((filter)=><Tag color="blue">{filter}</Tag> )}
+                  </div>
+                  <Tag  onClick={clearFilters}  className='tags_filters_remove' color="red" icon={<CloseCircleOutlined />}>Remover filtros</Tag>
+                </>
+              }
+            <TableClients 
+              clientList={clientList} 
+            />
+          </Content>
+      </section>
+      </>
   );
 }
  

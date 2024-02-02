@@ -30,7 +30,7 @@ export function RouteCalculateModal(){
 
    return(
     <div  className='modal_add_client_out'>
-        <Button onClick={showModal} icon={<CalculatorOutlined />} >Calcular rota</Button>
+        <Button   onClick={showModal} icon={<CalculatorOutlined />} >Calcular rota</Button>
         <Modal className='modal' open={isModalOpen} 
             onCancel={handleCancel} 
             footer={[

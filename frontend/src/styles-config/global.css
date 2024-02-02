@@ -1,11 +1,7 @@
 :root {
-	--primary-color : #2F70E5;
+	--primary-color : #009700;
 	--secondary-color : #2F70E5;
 	--white-color : #FFFFFF;
 	--black-color : #000000;
 	--green-color: #009700;
-}
-
-body{
-	font-family: 'Poppins', sans-serif;
 }

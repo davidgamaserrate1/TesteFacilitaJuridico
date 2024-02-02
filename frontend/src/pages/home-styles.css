@@ -33,6 +33,18 @@
     margin: 16px 64px;
 }
 
+.tags_filters{
+    margin: 8px;
+}
+
+.tags_filters_remove{
+   margin: 8px;
+}
+
+.tags_filters_remove:hover{
+    cursor: pointer;
+}
+
 @media (max-width:686px) {
     .main_content{
         border: none;

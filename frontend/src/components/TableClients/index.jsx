@@ -59,7 +59,7 @@ export function TableClients ({clientList}) {
     },
   ];
 
-  if( clientList.message ) return  <div className='empty_message'>{clientList.message}</div> 
+  if( clientList.message ) return  <Table className='table_clients' columns={columns}   locale={{emptyText: clientList.message }}/> 
 
   return(
       clientList.length > 0  && <Table className='table_clients' columns={columns} dataSource={clientList} /> 

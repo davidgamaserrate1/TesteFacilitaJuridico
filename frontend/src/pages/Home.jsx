@@ -1,105 +1,99 @@
+import './home-styles.css' 
 import React, { useEffect, useState } from "react";
 import { Header } from "../components/Header";
-import './home-styles.css' 
 import { Content } from "antd/es/layout/layout";
 import { AddClientModal } from "../components/AddClientModal";
 import {TableClients} from "../components/TableClients"; 
 import { getAllClients } from "../services/getClients";
-import { Alert, Button, Input, Modal, Typography } from 'antd';
-import { FilterOutlined } from "@ant-design/icons";
+import { Alert, Button, Input, Modal, Tag, Typography } from 'antd';
+import { CloseCircleOutlined, FilterOutlined } from "@ant-design/icons";
 import { getClientsByFilters } from "../services/getClientsByFilters";
- 
 
 export function Home() {
   const [clientList, setClientList] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
   const [filterName, setFilterName] = useState();
   const [filtersPhone, setFiltersPhone] = useState();
   const [filtersMail, setFiltersMail] = useState();
-
-
-
-
+  const [filtersList, setFiltersList] = useState([])
+  
   const showModal = () => {
     setIsModalOpen(true);
   };
-  
-  // async function handleFilter()  {
-  //   let filters = {}; 
-    
-  //   if (filterName) {
-  //     filters["name"] = filterName;
-  //   }
-  
-  //   if (filtersPhone) {
-  //     filters["phone"] = filtersPhone;
-  //   }
-    
-  //   if (filtersMail) {
-  //     filters["mail"] = filtersMail;
-  //   }
 
-   
-    
-  //   const filtredClients = await getClientsByFilters(JSON.stringify({filters}))
-  //   console.log(filtredClients);
-  // };
+  const handleFilter = async () => {
+    let queryParams = [];
+    let usedFilters = [];
 
-  // Atualize a função handleFilter no seu componente Home.jsx
+    if (filterName) {
+      queryParams.push(`name=${encodeURIComponent(filterName)}`);
+      usedFilters.push(`Nome : ${filterName}` )
+    }
 
-const handleFilter = async () => {
-  let queryParams = [];
+    if (filtersPhone) {
+      queryParams.push(`phone=${encodeURIComponent(filtersPhone)}`);
+      usedFilters.push(`Telefone : ${filtersPhone}` )
+    }
 
-  if (filterName) {
-    queryParams.push(`name=${encodeURIComponent(filterName)}`);
-  }
+    if (filtersMail) {
+      queryParams.push(`mail=${encodeURIComponent(filtersMail)}`);
+      usedFilters.push(`E-mail : ${filtersMail}` )
+    }
 
-  if (filtersPhone) {
-    queryParams.push(`phone=${encodeURIComponent(filtersPhone)}`);
-  }
+    const queryString = queryParams.join('&');
 
-  if (filtersMail) {
-    queryParams.push(`mail=${encodeURIComponent(filtersMail)}`);
-  }
+    try {
+      if(queryParams.length ===0 ){
+        await fetchClients()
+      } 
+      else{
+        const filtredClients = await getClientsByFilters(queryString);
+        setClientList(filtredClients);
+        setFiltersList(usedFilters)
+      }
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error('Erro ao obter clientes:', error);
+    }
 
-  const queryString = queryParams.join('&');
-
-  try {
-    const filtredClients = await getClientsByFilters(queryString);
-    console.log(filtredClients);
-  } catch (error) {
-    console.error('Erro ao obter clientes:', error);
-  }
-};
-
-// Atualize a função getClientsByFilters para receber uma string de consulta em vez de um objeto
-
+  };
 
   const handleCancel = () => {
     setIsModalOpen(false);
   };
- 
-  useEffect(() => {
-    const fetchClients = async () => {
-      try {
-        const clients = await getAllClients();
-        setClientList(clients);
-      } catch (error) {
-        console.error('Erro ao obter clientes:', error);
-      }
-    };
 
+  const clearFilters = () => {
+    setFiltersList([])
+    fetchClients();
+    setFilterName(undefined)
+    setFiltersPhone(undefined)
+    setFiltersMail(undefined)
+  };
+
+  const fetchClients = async () => {
+    try {
+      const clients = await getAllClients();
+      setClientList(clients);
+      
+    } catch (error) {
+      console.error('Erro ao obter clientes:', error);
+    }
+  };
+
+  useEffect(() => {   
     fetchClients();
   }, []);
 
+
+  
 return (
     <>
     <Header/>
       <Content className="main_content">
+      
         <div className="top_actions">
           <AddClientModal className="top_action_add"/>
-          <div   className="top_action_filters">
+          <div className="top_action_filters">
             <Button 
               type="primary" 
               onClick={showModal}  
@@ -107,9 +101,9 @@ return (
             >
               Filtros
             </Button>
+            
             <Modal 
-              open={isModalOpen} 
-              
+              open={isModalOpen}
               onCancel={handleCancel}
               footer={[
                   <Button className='modal_form__item__button' 
@@ -124,6 +118,7 @@ return (
               <h2 className='modal_tittle'>Filtros</h2>
               <div className='modal_form'>
                 <Alert className='modal_form__item__error' message="Por favor, Preencha ao menos um campo para filtrar" type="info" />              
+                
                 <Typography.Title level={5}>Nome</Typography.Title>
                 <Input className='modal_form__item' 
                   placeholder="Nome" 
@@ -133,9 +128,9 @@ return (
 
                 <Typography.Title level={5}>E-mail</Typography.Title>
                 <Input className='modal_form__item'
-                placeholder="E-mail" 
-                value={filtersMail}
-                onChange={(e)=>setFiltersMail(e.target.value)}
+                  placeholder="E-mail" 
+                  value={filtersMail}
+                  onChange={(e)=>setFiltersMail(e.target.value)}
                 />
 
                 <Typography.Title level={5}>Telefone</Typography.Title>
@@ -146,9 +141,20 @@ return (
                 />
               </div>
             </Modal>
-
           </div>
-        </div>    
+        </div>
+       {filtersList.length > 0 
+        && 
+        <div className='tags_filters'>
+          
+          <Typography.Title level={5}>
+            Filtros
+          <Tag  onClick={clearFilters}  className='tags_filters_remove'  icon={<CloseCircleOutlined />} >Remover filtros</Tag>
+          </Typography.Title>
+          
+          {filtersList.map((filter)=><Tag color="blue">{filter}</Tag> )}
+        </div>
+        }
         <TableClients clientList={clientList} />
       </Content>
     </>

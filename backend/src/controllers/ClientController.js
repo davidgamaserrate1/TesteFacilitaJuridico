@@ -148,7 +148,7 @@ export async function updateClientById(req, res) {
 export async function listClientsByCriteria(req, res) {
     try {
         let filters ={} 
-
+        
         if(req.query.name)
             filters["name"] = req.query.name;
 
@@ -156,7 +156,7 @@ export async function listClientsByCriteria(req, res) {
             filters["mail"] = req.query.mail;
         
         if(req.query.phone)
-            filters["phone"] = req.query.phone;        
+            filters["phone"] = req.query.phone;
         
         if (!filters || Object.keys(filters).length === 0) {
             return res.status(400).json({

@@ -114,9 +114,11 @@ export async function updateClientById(req, res) {
             y_coordinate : y_coordinate || clientFound.y_coordinate            
         };
 
-        const isUpdateRequired = (field) => clientUpdate[field] !== clientFound[field];
-
-        if (Object.keys(clientUpdate).some(isUpdateRequired)) {
+        const isUpdateRequired = Object.keys(clientUpdate).some((field) => {
+            return clientUpdate[field] !== clientFound[field];
+        });
+        
+        if (isUpdateRequired) {
             const queryUpdate = `UPDATE client SET name = $1, mail = $2, phone = $3, x_coordinate = $4, y_coordinate = $5 WHERE id = $6;`;
             await dbConnection.query(queryUpdate, [
                 clientUpdate.name,
@@ -126,11 +128,10 @@ export async function updateClientById(req, res) {
                 clientUpdate.y_coordinate,
                 id,
             ]);
-            
+        
             return res.status(200).json({
                 message: `Cliente atualizado com sucesso!`,
             });
-
         } else {
             return res.status(200).json({
                 message: 'Por favor, forneça informações diferentes das atuais',

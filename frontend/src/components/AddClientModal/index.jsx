@@ -1,6 +1,6 @@
 import './addClient-styles.css'
 import React, { useState } from 'react';
-import { Alert, Button, Input, InputNumber, Modal, Typography,message } from 'antd';
+import { Alert, Button, Input,  Modal, Typography,message } from 'antd';
 import {UserAddOutlined, 
     PhoneOutlined,MailOutlined, 
     BorderVerticleOutlined, 
@@ -16,8 +16,7 @@ export function AddClientModal(){
     const [phone, setPhone]=useState()
     const [coordinateX, setCoordinateX]=useState()
     const [coordinateY, setCoordinateY]=useState()  
-    const [messageApi, contextHolder] = message.useMessage();
-    
+    const [messageApi, contextHolder] = message.useMessage();    
     const [isModalOpen, setIsModalOpen] = useState(false);
     
     const showModal = () => {
@@ -48,7 +47,6 @@ export function AddClientModal(){
             "y_coordinate" : coordinateY,
 
         }
-
         const response = await createClient(clientStage)
      
         if (response){
@@ -79,6 +77,7 @@ export function AddClientModal(){
                 onOk={sendClient} 
                 onCancel={handleCancel} 
                 footer={[
+                     needAlert && <Alert  message="Por favor, Preencha todos os campos!" type="error" />,
                     <Button className='modal_form__item__button' 
                         size="large" 
                         type="primary"
@@ -90,7 +89,7 @@ export function AddClientModal(){
             >
                 <h2 className='modal_tittle'>Adicionar cliente</h2>
                 <div className='modal_form'>
-                    { needAlert && <Alert className='modal_form__item__error' message="Por favor, Preencha todos os campos!" type="error" />}
+                   
                     <Input className='modal_form__item' 
                         size="large" 
                         placeholder="Nome" 
@@ -112,22 +111,23 @@ export function AddClientModal(){
                         value={phone}
                         onChange={(e)=>setPhone(e.target.value)}
                     />
-                    
-                    <Title className='moda_form_item_coord_tittle' level={5}>Coordenandas</Title>
+                                        
+                    <Title className='moda_form_item_coord_tittle' level={5}>Coordenandas </Title>
+                    <Alert className='modal_form__item__error' message="Por favor, Preencha apenas com numeros" closable type="warning" />
                     <div className='moda_form_item_coord'>
-                        <InputNumber className='item_coord'
+                        <Input className='item_coord'
                             size="large"
-                            placeholder="Eixo X"
+                            placeholder="X"
                             prefix={<BorderVerticleOutlined />}
                             value={coordinateX}
-                            onChange={(value) => setCoordinateX(value)}
+                            onChange={(e)=>setCoordinateX(e.target.value)}
                         />
-                        <InputNumber className='item_coord'
+                        <Input className='item_coord'
                             size="large"
-                            placeholder="Eixo Y"
+                            placeholder="Y"
                             prefix={<BorderHorizontalOutlined />}
-                            value={coordinateY}
-                            onChange={(value) => setCoordinateY(value)}
+                            value={coordinateY}   
+                            onChange={(e)=>setCoordinateY(e.target.value)}
                         />
                     </div>
                 </div>

@@ -6,7 +6,6 @@ import './tableClients-styles.css'
 import { EditClientModal } from '../EditClientModal';
 
 export function TableClients ({clientList}) {
-  console.log(clientList)
 
   async function handleDelete (id){
     await removeClient(id)

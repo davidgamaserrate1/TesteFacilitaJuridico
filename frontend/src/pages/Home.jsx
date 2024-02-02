@@ -8,6 +8,7 @@ import { getAllClients } from "../services/getClients";
 import { Alert, Button, Input, InputNumber, Modal, Tag, Typography } from 'antd';
 import { BorderHorizontalOutlined, BorderVerticleOutlined, CloseCircleOutlined, FilterOutlined } from "@ant-design/icons";
 import { getClientsByFilters } from "../services/getClientsByFilters";
+import { RouteCalculateModal } from '../components/RouteCalculateModal';
 
 export function Home() {
   const [clientList, setClientList] = useState([]);
@@ -40,13 +41,14 @@ export function Home() {
       usedFilters.push(`E-mail : ${filtersMail}` )
     }
     if (filtersCoordinateX) {
-      queryParams.push(`y_coordinate=${encodeURIComponent(filtersCoordinateX)}`);
+      queryParams.push(`x_coordinate=${encodeURIComponent(filtersCoordinateX)}`);
       usedFilters.push(`X : ${filtersCoordinateX}` )
     }
     if (filtersCoordinateY) {
       queryParams.push(`y_coordinate=${encodeURIComponent(filtersCoordinateY)}`);
       usedFilters.push(`Y : ${filtersCoordinateY}` )
     }
+    
     const queryString = queryParams.join('&');
 
     try {
@@ -75,6 +77,8 @@ export function Home() {
     setfiltersName(undefined)
     setFiltersPhone(undefined)
     setFiltersMail(undefined)
+    setFiltersCoordinateX(undefined)
+    setFiltersCoordinateY(undefined)
   };
 
   const fetchClients = async () => {
@@ -89,7 +93,7 @@ export function Home() {
 
   useEffect(() => {   
     fetchClients();
-  });
+  },[]);
   
 return (
     <>
@@ -97,9 +101,9 @@ return (
       <Content className="main_content">      
         <div className="top_actions">
           <AddClientModal className="top_action_add"/>
+            <RouteCalculateModal />
           <div className="top_action_filters">
-            <Button 
-              type="primary" 
+            <Button type="primary" 
               onClick={showModal}  
               icon={<FilterOutlined />} >
               Filtros
@@ -129,8 +133,7 @@ return (
                   placeholder="Telefone" 
                   value={filtersPhone}
                   onChange={(e)=>setFiltersPhone(e.target.value)}
-                />
-                
+                />                
                 <Typography.Title level={5}>Coordenadas</Typography.Title>
                 <div className='moda_form_item_coord'>
                   <InputNumber className='item_coord'
@@ -152,8 +155,7 @@ return (
             </Modal>
           </div>
         </div>
-       {filtersList.length > 0 
-        && 
+       {filtersList.length > 0 && 
           <>
             <div className='tags_filters'>          
               <Typography.Title level={5}> Filtros </Typography.Title>          

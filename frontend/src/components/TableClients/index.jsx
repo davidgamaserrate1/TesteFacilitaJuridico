@@ -6,6 +6,7 @@ import './tableClients-styles.css'
 import { EditClientModal } from '../EditClientModal';
 
 export function TableClients ({clientList}) {
+  console.log(clientList)
 
   async function handleDelete (id){
     await removeClient(id)
@@ -32,10 +33,16 @@ export function TableClients ({clientList}) {
       width: '15%',
     },
     {
-      title: 'Coordenadas',
-      dataIndex: 'coordinates',
-      key: 'coordinates',
-      width: '10%',      
+      title: 'Coordenada X',
+      dataIndex: 'x_coordinate',
+      key: 'x_coordinate',
+       
+    },
+    {
+      title: 'Coordenada Y',
+      dataIndex: 'y_coordinate',
+      key: 'y_coordinate',
+   
     },
     {
       title: 'Ação',
@@ -47,7 +54,8 @@ export function TableClients ({clientList}) {
             nameParam={record.name} 
             mailParam={record.mail} 
             phoneParam={record.phone} 
-            coordinates={record.coordinates} 
+            x_coordinate={record.x_coordinate} 
+            y_coordinate={record.y_coordinate} 
              
           />
           <Popconfirm 

@@ -10,15 +10,14 @@ import { updateClient } from '../../services/updateClient';
  
 const { Title } = Typography;
 
-export function EditClientModal({id, nameParam, mailParam, phoneParam, coordinates}){
-    const stageCoordinateX=coordinates.split(',')[0]
-    const stageCoordinateY=coordinates.split(',')[1]
+export function EditClientModal({id, nameParam, mailParam, phoneParam, x_coordinate, y_coordinate}){
+    
 
     const [name, setName]=useState(nameParam)
     const [mail, setMail]=useState(mailParam)
     const [phone, setPhone]=useState(phoneParam)
-    const [coordinateX, setCoordinateX]=useState(stageCoordinateX)
-    const [coordinateY, setCoordinateY]=useState(stageCoordinateY)  
+    const [coordinateX, setCoordinateX]=useState(x_coordinate)
+    const [coordinateY, setCoordinateY]=useState(y_coordinate)  
     const [messageApi, contextHolder] = message.useMessage();
     
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,13 +29,15 @@ export function EditClientModal({id, nameParam, mailParam, phoneParam, coordinat
     const handleCancel = () => {
         setIsModalOpen(false);
     };
-    
+
     const sendClient =async() =>{
         let clientStage = {
             "name" : name,
             "mail" : mail,
             "phone" : phone,
-            "coordinates": `${coordinateX}, ${coordinateY}`
+            "x_coordinate" : y_coordinate,
+            "y_coordinate ": y_coordinate
+            
         }
 
         const response = await updateClient(id, clientStage)

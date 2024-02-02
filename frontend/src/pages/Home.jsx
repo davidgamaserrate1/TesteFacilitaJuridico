@@ -82,9 +82,7 @@ export function Home() {
 
   useEffect(() => {   
     fetchClients();
-  } );
-
-
+  },[] );
   
 return (
     <>

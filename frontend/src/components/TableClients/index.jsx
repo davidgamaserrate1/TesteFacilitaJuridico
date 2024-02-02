@@ -1,18 +1,15 @@
 import React, {  } from 'react';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined } from '@ant-design/icons';
 import { Button, Space, Table, Popconfirm } from 'antd';
 import { removeClient } from '../../services/removeClient';
 import './tableClients-styles.css'
+import { EditClientModal } from '../EditClientModal';
 
 export function TableClients ({clientList}) {
- 
-  
-  const handleEdit = (record) => {    
-    console.log('Editar cliente:', record);
-  };
 
-  const handleDelete = (id) => {
-    removeClient(id)
+  async function handleDelete (id){
+    await removeClient(id)
+    window.location.reload()
   };
 
   const columns = [
@@ -44,8 +41,15 @@ export function TableClients ({clientList}) {
       title: 'Ação',
       key: 'action',width: '10%',
       render: (_, record) => (
-        <Space size="middle">
-          <Button icon={<EditOutlined />} onClick={() => handleEdit(record)} />
+        <Space size="small">
+          <EditClientModal 
+            id={record.id} 
+            nameParam={record.name} 
+            mailParam={record.mail} 
+            phoneParam={record.phone} 
+            coordinates={record.coordinates} 
+             
+          />
           <Popconfirm 
             title="Deseja realmente excluir este cliente?"
             onConfirm={() => handleDelete(record.id)}

@@ -82,15 +82,14 @@ export function Home() {
 
   useEffect(() => {   
     fetchClients();
-  }, []);
+  } );
 
 
   
 return (
     <>
     <Header/>
-      <Content className="main_content">
-      
+      <Content className="main_content">      
         <div className="top_actions">
           <AddClientModal className="top_action_add"/>
           <div className="top_action_filters">
@@ -145,15 +144,15 @@ return (
         </div>
        {filtersList.length > 0 
         && 
-        <div className='tags_filters'>
-          
-          <Typography.Title level={5}>
-            Filtros
-          <Tag  onClick={clearFilters}  className='tags_filters_remove'  icon={<CloseCircleOutlined />} >Remover filtros</Tag>
-          </Typography.Title>
-          
-          {filtersList.map((filter)=><Tag color="blue">{filter}</Tag> )}
-        </div>
+          <>
+          <div className='tags_filters'>          
+            <Typography.Title level={5}>
+              Filtros
+            </Typography.Title>          
+            {filtersList.map((filter)=><Tag color="blue">{filter}</Tag> )}
+          </div>
+          <Tag  onClick={clearFilters}  className='tags_filters_remove' color="red" icon={<CloseCircleOutlined />} >Remover filtros</Tag>
+          </>
         }
         <TableClients clientList={clientList} />
       </Content>

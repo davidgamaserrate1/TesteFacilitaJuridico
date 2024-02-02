@@ -20,7 +20,7 @@ export async function createClient(req, res) {
 
 export async function listClients(_, res) {
 	try {
-		const querySelect = `SELECT * FROM client;`
+		const querySelect = `SELECT * FROM client order by id;`
 		const queryResult = await dbConnection.query(querySelect)
 		const listClients = queryResult.rows;
        
@@ -130,7 +130,7 @@ export async function updateClientById(req, res) {
             ]);
 
             return res.status(200).json({
-                message: `Cliente ${id} atualizado com sucesso!`,
+                message: `Cliente atualizado com sucesso!`,
             });
         } else {
             return res.status(200).json({

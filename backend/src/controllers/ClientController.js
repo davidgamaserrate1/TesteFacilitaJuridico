@@ -147,13 +147,22 @@ export async function updateClientById(req, res) {
  
 export async function listClientsByCriteria(req, res) {
     try {
-        const { filters } = req.body;
+        let filters ={} 
+
+        if(req.query.name)
+            filters["name"] = req.query.name;
+
+        if(req.query.mail)
+            filters["mail"] = req.query.mail;
+        
+        if(req.query.phone)
+            filters["phone"] = req.query.phone;        
+        
         if (!filters || Object.keys(filters).length === 0) {
             return res.status(400).json({
                 message: 'Por favor, forneça pelo menos um critério de filtro.',
             });
         }
-
         const queryParams = [];
         const whereClauses = [];
 
@@ -184,8 +193,7 @@ export async function listClientsByCriteria(req, res) {
             }
         });
         
-        const querySelect = `SELECT * FROM client WHERE ${whereClauses.join(' AND ')};`;
-        console.log(querySelect, queryParams)
+        const querySelect = `SELECT * FROM client WHERE ${whereClauses.join(' AND ')};`;        
 
         const queryResult = await dbConnection.query(querySelect, queryParams);
         const listClients = queryResult.rows;

@@ -157,6 +157,12 @@ export async function listClientsByCriteria(req, res) {
         
         if(req.query.phone)
             filters["phone"] = req.query.phone;
+       
+        if(req.query.x_coordinate)
+            filters["x_coordinate"] = req.query.x_coordinate;
+        
+        if(req.query.y_coordinate)
+            filters["y_coordinate"] = req.query.y_coordinate;
         
         if (!filters || Object.keys(filters).length === 0) {
             return res.status(400).json({
@@ -186,9 +192,17 @@ export async function listClientsByCriteria(req, res) {
                     whereClauses.push(`phone ILIKE $${index + 1}`);
                     queryParams.push(`%${value}%`);
                     break;
+                case 'x_coordinate':
+                    whereClauses.push(`x_coordinate = $${index + 1}`);
+                    queryParams.push(value);
+                    break;
+                case 'y_coordinate':
+                    whereClauses.push(`y_coordinate = $${index + 1}`);
+                    queryParams.push(value);
+                    break;
                 default:
                     return res.status(400).json({
-                        message: `Critério inválido: ${key}. Escolha entre id, name, mail ou phone.`,
+                        message: `Critério inválido: ${key}. Escolha entre id, name, mail, phone, x_coordinate ou y_coordinate.`,
                     });
             }
         });
@@ -196,6 +210,9 @@ export async function listClientsByCriteria(req, res) {
         const querySelect = `SELECT * FROM client WHERE ${whereClauses.join(' AND ')};`;        
 
         const queryResult = await dbConnection.query(querySelect, queryParams);
+
+        console.log(querySelect, queryParams)
+ 
         const listClients = queryResult.rows;
 
         if (listClients[0]?.id !== undefined)

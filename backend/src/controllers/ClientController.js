@@ -2,9 +2,9 @@ import { dbConnection } from "../../database/config/dbConnect.js";
 
 export async function createClient(req, res) {
     try {
-        const { name, mail, phone, coordinates } = req.body;
-        const queryInsert = `INSERT INTO  client ( name, mail, phone, coordinates) VALUES ( $1, $2, $3, $4) ;`
-        const itemInsert = [name, mail, phone, coordinates]
+        const { name, mail, phone, x_coordinate, y_coordinate } = req.body;
+        const queryInsert = `INSERT INTO  client ( name, mail, phone, x_coordinate, y_coordinate) VALUES ( $1, $2, $3, $4, $5) ;`
+        const itemInsert = [name, mail, phone, x_coordinate, y_coordinate]
         
         await dbConnection.query(queryInsert, itemInsert)
         
@@ -84,7 +84,6 @@ export async function listClientById(req, res) {
 		});
 	}
 }
- 
 
 export async function updateClientById(req, res) {
     try {
@@ -107,25 +106,27 @@ export async function updateClientById(req, res) {
             });
         }
         
-        const { name, mail, phone, coordinates } = req.body;
+        const { name, mail, phone, x_coordinate, y_coordinate } = req.body;
         
         const clientUpdate = {
             name: name || clientFound.name,
             mail: mail || clientFound.mail,
             phone: phone || clientFound.phone,
-            coordinates: coordinates || clientFound.coordinates,
+            x_coordinate: x_coordinate || clientFound.x_coordinate,
+            y_coordinate : y_coordinate || clientFound.y_coordinate            
         };
         
         const isUpdateRequired = (field) => clientUpdate[field] !== clientFound[field];
 
         if (Object.keys(clientUpdate).some(isUpdateRequired)) {
-            const queryUpdate = `UPDATE client SET name = $1, mail = $2, phone = $3, coordinates = $4 WHERE id = $5;`;
+            const queryUpdate = `UPDATE client SET name = $1, mail = $2, phone = $3, x_coordinate = $4, y_coordinate = $5 WHERE id = $6;`;
 
             await dbConnection.query(queryUpdate, [
                 clientUpdate.name,
                 clientUpdate.mail,
                 clientUpdate.phone,
-                clientUpdate.coordinates,
+                clientUpdate.x_coordinate,
+                clientUpdate.y_coordinate,
                 id,
             ]);
 
@@ -144,7 +145,6 @@ export async function updateClientById(req, res) {
     }
 }
 
- 
 export async function listClientsByCriteria(req, res) {
     try {
         let filters ={} 

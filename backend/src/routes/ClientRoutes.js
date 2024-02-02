@@ -1,5 +1,6 @@
 import express from "express";
 import {createClient, listClientById, listClients, listClientsByCriteria, removeClientById, updateClientById} from "../controllers/ClientController.js";
+
 const ClientRouter = express.Router()
 
 ClientRouter
@@ -10,6 +11,4 @@ ClientRouter
     .post("/cadastrar", createClient)
     .delete("/remover/:id", removeClientById)
 
-export {
-    ClientRouter
-}
+export { ClientRouter }

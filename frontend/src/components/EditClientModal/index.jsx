@@ -35,8 +35,8 @@ export function EditClientModal({id, nameParam, mailParam, phoneParam, x_coordin
             "name" : name,
             "mail" : mail,
             "phone" : phone,
-            "x_coordinate" : y_coordinate,
-            "y_coordinate ": y_coordinate
+            "x_coordinate" : coordinateX,
+            "y_coordinate": coordinateY
             
         }
 

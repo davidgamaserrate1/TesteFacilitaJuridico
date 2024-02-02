@@ -97,17 +97,15 @@ export async function updateClientById(req, res) {
 
         const querySelect = `SELECT * FROM client WHERE id = $1;`;
         const clientResult = await dbConnection.query(querySelect, [id]);
-
         const clientFound = clientResult.rows[0];
-
+        
         if (!clientFound) {
             return res.status(404).json({
                 message: `Cliente ${id} não encontrado`,
             });
         }
         
-        const { name, mail, phone, x_coordinate, y_coordinate } = req.body;
-        
+        const { name, mail, phone, x_coordinate, y_coordinate } = req.body;        
         const clientUpdate = {
             name: name || clientFound.name,
             mail: mail || clientFound.mail,
@@ -115,12 +113,11 @@ export async function updateClientById(req, res) {
             x_coordinate: x_coordinate || clientFound.x_coordinate,
             y_coordinate : y_coordinate || clientFound.y_coordinate            
         };
-        
+
         const isUpdateRequired = (field) => clientUpdate[field] !== clientFound[field];
 
         if (Object.keys(clientUpdate).some(isUpdateRequired)) {
             const queryUpdate = `UPDATE client SET name = $1, mail = $2, phone = $3, x_coordinate = $4, y_coordinate = $5 WHERE id = $6;`;
-
             await dbConnection.query(queryUpdate, [
                 clientUpdate.name,
                 clientUpdate.mail,
@@ -129,10 +126,11 @@ export async function updateClientById(req, res) {
                 clientUpdate.y_coordinate,
                 id,
             ]);
-
+            
             return res.status(200).json({
                 message: `Cliente atualizado com sucesso!`,
             });
+
         } else {
             return res.status(200).json({
                 message: 'Por favor, forneça informações diferentes das atuais',
@@ -147,34 +145,34 @@ export async function updateClientById(req, res) {
 
 export async function listClientsByCriteria(req, res) {
     try {
-        let filters ={} 
+        let filters ={}         
         
-        if(req.query.name)
+        if(req.query.name) 
             filters["name"] = req.query.name;
 
         if(req.query.mail)
-            filters["mail"] = req.query.mail;
-        
+            filters["mail"] = req.query.mail;        
+
         if(req.query.phone)
-            filters["phone"] = req.query.phone;
-       
+            filters["phone"] = req.query.phone;       
+
         if(req.query.x_coordinate)
-            filters["x_coordinate"] = req.query.x_coordinate;
-        
+            filters["x_coordinate"] = req.query.x_coordinate;        
+
         if(req.query.y_coordinate)
-            filters["y_coordinate"] = req.query.y_coordinate;
+            filters["y_coordinate"] = req.query.y_coordinate;        
         
         if (!filters || Object.keys(filters).length === 0) {
             return res.status(400).json({
                 message: 'Por favor, forneça pelo menos um critério de filtro.',
             });
         }
+        
         const queryParams = [];
         const whereClauses = [];
-
+        
         Object.keys(filters).forEach((key, index) => {
             const value = filters[key];
-
             switch (key) {
                 case 'id':
                     whereClauses.push(`id = $${index + 1}`);
@@ -208,11 +206,7 @@ export async function listClientsByCriteria(req, res) {
         });
         
         const querySelect = `SELECT * FROM client WHERE ${whereClauses.join(' AND ')};`;        
-
         const queryResult = await dbConnection.query(querySelect, queryParams);
-
-        console.log(querySelect, queryParams)
- 
         const listClients = queryResult.rows;
 
         if (listClients[0]?.id !== undefined)
@@ -228,4 +222,3 @@ export async function listClientsByCriteria(req, res) {
         });
     }
 }
-

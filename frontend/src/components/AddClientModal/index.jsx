@@ -37,11 +37,16 @@ export function AddClientModal(){
     };
 
     const sendClient =async() =>{
+        if(needAlert){
+            return 'Por favor, Preencha todos os campos e tente novamente'
+        }
         let clientStage = {
             "name" : name,
             "mail" : mail,
             "phone" : phone,
-            "coordinates": `${coordinateX}, ${coordinateY}`
+            "x_coordinate" : coordinateX, 
+            "y_coordinate" : coordinateY,
+
         }
 
         const response = await createClient(clientStage)

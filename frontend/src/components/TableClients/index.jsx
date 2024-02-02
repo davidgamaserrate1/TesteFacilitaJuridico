@@ -6,7 +6,7 @@ import './tableClients-styles.css'
 import { EditClientModal } from '../EditClientModal';
 
 export function TableClients ({clientList}) {
-
+  
   async function handleDelete (id){
     await removeClient(id)
     window.location.reload()
@@ -55,7 +55,6 @@ export function TableClients ({clientList}) {
             phoneParam={record.phone} 
             x_coordinate={record.x_coordinate} 
             y_coordinate={record.y_coordinate} 
-             
           />
           <Popconfirm 
             title="Deseja realmente excluir este cliente?"
@@ -70,10 +69,21 @@ export function TableClients ({clientList}) {
     },
   ];
 
-  if( clientList.message ) return  <Table className='table_clients' columns={columns}   locale={{emptyText: clientList.message }}/> 
+  if( clientList.message ) 
+  return (
+    <Table className='table_clients' 
+      columns={columns}   
+      locale={{emptyText: clientList.message }}
+    /> 
+  )
 
   return(
-      clientList.length > 0  && <Table className='table_clients' columns={columns} dataSource={clientList} /> 
+    clientList.length > 0  && 
+    <Table className='table_clients' 
+      columns={columns} 
+      dataSource={clientList} 
+    /> 
   );
+  
 };
 

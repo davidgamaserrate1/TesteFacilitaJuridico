@@ -19,7 +19,6 @@ export function RouteCalculateModal(){
         try {
             const clients = await calculateRoute();
             setClientList(clients);
-            
         } catch (error) {
             console.error('Erro ao obter clientes:', error);
         }
@@ -31,35 +30,21 @@ export function RouteCalculateModal(){
 
    return(
     <div  className='modal_add_client_out'>
-        <Button  
-            onClick={showModal} 
-            icon={<CalculatorOutlined />} >
-            Calcular rota
-        </Button>
-        <Modal className='modal'
-            open={isModalOpen} 
+        <Button onClick={showModal} icon={<CalculatorOutlined />} >Calcular rota</Button>
+        <Modal className='modal' open={isModalOpen} 
             onCancel={handleCancel} 
             footer={[
-                <Button className='modal_form__item__button' 
-                    size="large" 
-                    type="primary"
-                    onClick={handleCancel} 
-                >
-                    Fechar
-                </Button>
+                <Button className='modal_form__item__button' size="large" type="primary"onClick={handleCancel} >Fechar</Button>
             ]}
         >
             <h2 className='modal_tittle'>Rota de clientes</h2>
-            <List  className='modal_form'
-                  pagination={{
-                   
-                    pageSize: 12,
-                  }}
-                  size="small"
-                bordered
-                dataSource={clientList}
-                renderItem={( item ) => <List.Item style={{paddingLeft:'32px'}}> {item.name}</List.Item>}
-                />
+            <List  className='modal_form' 
+                pagination={{pageSize: 12}} 
+                size="small" bordered dataSource={clientList}
+                renderItem={
+                    ( item ) => <List.Item style={{paddingLeft:'32px'}}> {item.name}</List.Item>
+                }
+            />
         </Modal>
     </div>
    )

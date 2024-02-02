@@ -33,7 +33,7 @@ export async function listClients(_, res) {
 
 	} catch (error) {
 		res.status(500).json({
-			"error": `Erro ao cadastrar cliente: ${error}`
+			"error": `Erro ao consultar cliente: ${error}`
 		});
 	}
 }
@@ -221,4 +221,25 @@ export async function listClientsByCriteria(req, res) {
             error: `Erro ao listar clientes: ${error}`,
         });
     }
+}
+
+export async function calculateRoute(req, res){
+        try {
+            const querySelect = `SELECT * FROM client order by x_coordinate, y_coordinate;`
+            const queryResult = await dbConnection.query(querySelect)
+            const listClients = queryResult.rows;
+           
+            if (listClients[0]?.id !== undefined)
+                return res.status(200).json(listClients);        
+            
+            res.status(404).json({
+                "message": 'Nenhum cliente cadastrado'
+            });
+    
+        } catch (error) {
+            res.status(500).json({
+                "error": `Erro ao consultar clientes: ${error}`
+            });
+        }
+     
 }

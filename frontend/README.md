@@ -15,7 +15,7 @@ O projeto frontend foi desenvolvido em React e tem como objetivo oferecer uma in
 
 2. Acesse o diretório do frontend:
    ```bash
-   cd TesteFacilitaJuridico
+   cd TesteFacilitaJuridico/frontend
    ```
 
 3. Instale as dependências:

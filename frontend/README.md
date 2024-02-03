@@ -23,6 +23,13 @@ O projeto frontend foi desenvolvido em React e tem como objetivo oferecer uma in
    npm install
    ```
 
+3.1 **Configuração do `.env`:**
+   - Crie um arquivo `.env` na raiz do diretório `frontend` e adicione o link da api base do back-end, ajustando conforme necessário:
+      
+      
+     ```
+     REACT_APP_CLIENT_API_BASE=http://localhost:4000/clientes
+     ```
 4. Inicie a aplicação:
    ```bash
    npm start

@@ -41,7 +41,7 @@ export function Home() {
   
   useEffect(() => {   
     fetchClients();
-  });
+  },[]);
   
   const totalClients = clientList.length
 return (
@@ -49,7 +49,7 @@ return (
       <Header/>
       <section id="home">
           <div className="main_content_tittle"> Clientes</div>
-          <div className="main_content_subtittle">  <Tag color='green'>{totalClients} cadastrados</Tag> </div>
+          <div className="main_content_subtittle">  <Tag color='green'>Total: {totalClients}</Tag> </div>
           <Content className="main_content">      
             <div className="top_actions">
               <div className="top_action_filters">

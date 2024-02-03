@@ -59,7 +59,9 @@ export function AddClientModal(){
         if (!response.error) {
             resetState();
             setIsModalOpen(false);
+            window.location.reload()
         }
+
     }
     
     const needAlert = !name || !mail || !phone || ! coordinateX || !coordinateY

@@ -46,7 +46,14 @@ Antes de executar o projeto, é necessário configurar um banco de dados Postgre
      npm install
      ```
 
-2.2. **Inicializando o Backend:**
+2.2. **Criando tabela no banco de dados:**
+ Após configurar o banco de dados e incluir as informações corretamente no arquivo .env, execute o seguinte comando para criar a tabela no banco de dados :
+
+   ```bash
+   npm run database
+   ```
+
+2.3. **Inicializando o Backend:**
 
    - Execute o seguinte comando para iniciar o backend:
 

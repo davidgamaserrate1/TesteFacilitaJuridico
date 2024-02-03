@@ -158,8 +158,8 @@ CREATE TABLE client (
 
 ### Dependências
 
-- Node.js (versão recomendada: 14.x)
-- PostgreSQL
+- Node.js (versão recomendada: 18.x)
+- PostgreSQL (versão recomendada: 14)
 
 ### Tecnologias Utilizadas
 

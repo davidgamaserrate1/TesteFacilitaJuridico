@@ -14,10 +14,11 @@ const dbConnection = new pg.Pool({
 dbConnection.connect((err, _, release) => {
     if (err) {
         console.error('Error connecting to the database:', err.message);
-    } else {
-        console.log('Connected to the database successfully!');
-        release();
-    }
+        return  ('Error connecting to the database:', err.message);
+    } 
+    console.log('Connected to the database successfully!');
+    release();
+    
 });
 
 export {

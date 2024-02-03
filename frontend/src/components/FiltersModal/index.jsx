@@ -75,7 +75,13 @@ export function FiltersModal  ({  onFilter })  {
         <Button   onClick={showModal}  icon={<FunnelPlotOutlined  />}>Filtros</Button>
         <Modal open={isModalOpen} onCancel={handleCancel}
             footer={[ 
-                <Button className='modal_form__item__button' type="primary" onClick={()=>handleFilter()}>Filtrar</Button> 
+                <Button className='modal_form__item__button' 
+                    style={{
+                        background:'var(--primary-color)',
+                        color: 'var(--white-color)'
+                    }}
+                    type="primary" 
+                    onClick={()=>handleFilter()}>Filtrar</Button> 
             ]}
         >
             <h2 className='modal_tittle'>Filtros</h2>

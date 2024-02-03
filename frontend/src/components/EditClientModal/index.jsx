@@ -48,6 +48,7 @@ export function EditClientModal({id, nameParam, mailParam, phoneParam, x_coordin
            
         if (!response.error) {
             setIsModalOpen(false);
+            window.location.reload()
         }
     }
     
@@ -68,6 +69,10 @@ export function EditClientModal({id, nameParam, mailParam, phoneParam, x_coordin
                         size="large" 
                         type="primary"
                         onClick={sendClient}
+                        style={{
+                            background:'var(--primary-color)',
+                            color: 'var(--white-color)'
+                        }}
                     >
                         Salvar
                     </Button>

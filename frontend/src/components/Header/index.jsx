@@ -8,12 +8,12 @@ export function Header(){
     return(
         <header className="header">
             <h1 className="header_tittle"> Facilita<span className="header_tittle_strong">Limpeza</span></h1>
-           
+
            < div className="header_avatar_list" >
                 <div className="header_avatar_name" >
-                    <Avatar  className="header_avatar_icon" icon={<UserOutlined />}/> 
+                    <Avatar  icon={<UserOutlined />}/> 
                     <div  className="header_info">
-                        <div>David</div>
+                        <div>User</div>
                         <div>Gerente</div>
                     </div>
                 </div>

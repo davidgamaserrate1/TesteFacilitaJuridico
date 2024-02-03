@@ -82,7 +82,10 @@ export function AddClientModal(){
                      needAlert && <Alert  message="Por favor, Preencha todos os campos!" type="error" />,
                     <Button className='modal_form__item__button' 
                         size="large" 
-                        type="primary"
+                        style={{
+                            background:'var(--primary-color)',
+                            color: 'var(--white-color)'
+                        }}
                         onClick={sendClient}
                     >
                         Salvar

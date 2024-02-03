@@ -30,11 +30,22 @@ export function RouteCalculateModal(){
 
    return(
     <div  className='modal_add_client_out'>
-        <Button   onClick={showModal} icon={<EnvironmentOutlined   />} >Visualizar Ordem de Visitação</Button>
+        <Button   
+             style={{
+                background:'var(--primary-color)',
+                color: 'var(--white-color)'
+            }}
+            onClick={showModal} icon={<EnvironmentOutlined   />} 
+        >Visualizar Ordem de Visitação</Button>
         <Modal className='modal' open={isModalOpen} 
             onCancel={handleCancel} 
             footer={[
-                <Button className='modal_form__item__button' size="large" type="primary"onClick={handleCancel} >Fechar</Button>
+                <Button className='modal_form__item__button'   
+                    style={{
+                        background:'var(--primary-color)',
+                        color: 'var(--white-color)'
+                    }} size="large" type="primary"onClick={handleCancel} 
+                >Fechar</Button>
             ]}
         >
             <h2 className='modal_tittle'>Rota de clientes</h2>

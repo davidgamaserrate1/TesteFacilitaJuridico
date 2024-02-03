@@ -1,6 +1,6 @@
 import { Button, List, Modal } from "antd";
 import { calculateRoute } from "../../services/calculateRoute";
-import { CalculatorOutlined } from "@ant-design/icons";
+import {  EnvironmentOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 
 export function RouteCalculateModal(){
@@ -30,7 +30,7 @@ export function RouteCalculateModal(){
 
    return(
     <div  className='modal_add_client_out'>
-        <Button   onClick={showModal} icon={<CalculatorOutlined />} >Calcular rota</Button>
+        <Button   onClick={showModal} icon={<EnvironmentOutlined   />} >Visualizar Ordem de Visitação</Button>
         <Modal className='modal' open={isModalOpen} 
             onCancel={handleCancel} 
             footer={[

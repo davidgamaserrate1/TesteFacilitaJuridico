@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Alert, Button, Input, InputNumber, Modal, Typography } from 'antd';
-import { BorderHorizontalOutlined, BorderVerticleOutlined, FilterOutlined } from "@ant-design/icons";
+import { BorderHorizontalOutlined, BorderVerticleOutlined, FunnelPlotOutlined } from "@ant-design/icons";
 import { getClientsByFilters } from '../../services/getClientsByFilters'
 import { getAllClients } from '../../services/getClients';
 
@@ -72,7 +72,7 @@ export function FiltersModal  ({  onFilter })  {
   
   return (
    <div  className='modal_add_client_out'>
-        <Button   onClick={showModal}  icon={<FilterOutlined />}>Filtros</Button>
+        <Button   onClick={showModal}  icon={<FunnelPlotOutlined  />}>Filtros</Button>
         <Modal open={isModalOpen} onCancel={handleCancel}
             footer={[ 
                 <Button className='modal_form__item__button' type="primary" onClick={()=>handleFilter()}>Filtrar</Button> 
